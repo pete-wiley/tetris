@@ -1,0 +1,62 @@
+body {
+    background-image: linear-gradient(to right, #360033, #0b8793)
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 65px
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 35px;
+    margin-bottom: 80px 
+}
+
+
+#scorediv {
+    text-align: center;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 30px;
+    margin-top: 20px
+}
+
+
+#score {
+    display: inline-block;
+    font-family: 'Major Mono Display', monospace;
+}
+
+
+canvas {
+    display: block;
+    margin: 0 auto
+}
+
+#reset {
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Major Mono Display', monospace;
+    cursor: pointer;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px
+}
+
+#resetdiv {
+    display: flex;
+    justify-content: center
+}
+
+#high-score-div {
+    text-align: center;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 25px;
+    margin-top: 20px
+}
+
+#high-score {
+    display: inline-block
+}

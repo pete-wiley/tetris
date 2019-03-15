@@ -1,0 +1,36 @@
+Tetris
+
+Project Rules:
+
+-Need to show significant competency with  backend (example: saving user info in JSON)
+    -Going to integrate "leaderboards"/high scores, may not end up being traditional tetris scoring rules, but will come up with something to score the game and 
+    scores will be saved in a json file, displayed at main menu, at game over, and if applicable, user will be able to input their name to be added and displayed
+
+-Easily usable by the User (i.e Create a user experience)
+    -duh; played a few js tetris games, they all controlled like crap, going to fix that and give a good ui
+
+-3 main unique features (Even if you are replicating a  game.  Add something unique)
+    1. Going to integrate "shiny pieces"; they will take on the shapes of stock tetris pieces (picked at random), and will spawn at a set interval (not too frequently)
+    and when placed, they will clear all of the lines horizontally no matter where they are placed; if on the off chance you get a "shiny long piece" and tetris with
+    it, it will not only clear the 4 lines you would normally get from tetrissing, but you would also clear the 4 lines above where you tetrissed, for a total of 8 
+    lines cleared, but only if you get a tetris while using this piece; otherwise, it operates just as a regular long piece
+    2. Another new piece, called a "fill piece", will be a new single cell piece that whem placed, will fill the width of its available space; for example, if in your
+    stack you had a crevice that was 6 cells wide and you were having a tough time getting the right pieces to fill it, you could place this anywhere inside that 
+    crevice and fill it completely, or you could place it directly on top of your stack and it essentially clears itself
+    3. My two new mechanics above make the game easier, needed something to balance it out; to do this, I'll integrate "false shinies" (think a fake smash ball in
+    super smash bros ultimate); these on the surface look like regular "shiny pieces", but if you look closely, there will be some minor distinguishing difference,
+    and then you will know you have a "false shiny"; the way these pieces work is if you clear ANY lines at all with them, they operate as regular pieces, but if you 
+    dont clear any lines, depending on the height of the piece when you place it, lines appear taking the width of the whole board, leaving single cell holes 
+    generated at random that you have to clear to make go away; this is something avoidable and manageable if you make the mistake of not clearing any lines with this
+    piece, but in the late game, this could potentially make things much more difficult
+
+-You can use different technology or platform (do not be afraid to try something new. If you are passionate about something  and you think a tool that has 
+been demonstrated would be useful. Use it.  It may take time to learn it but the point of this is to get you to build and learn!)
+    -wish I had more time to think about this, but its not like we dont have 11 more weeks
+
+-You have until Wednesday morning to  turn this in (Yes it should be on Github)
+    -jesus
+
+-Your portfolio could be a project but DM me if that is the case. There are some expectations there.
+
+
