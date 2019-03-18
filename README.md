@@ -1,3 +1,4 @@
 # Tetris
 ### This is a Tetris game made with HTML/CSS and Javascript. Making this project required me to learn about HTML canvas and forced me to think less about the bigger picture and really break down, examine, and implement the smaller pieces that make it. The hardest part was finding a good starting point after drawing the board. I had to force myself to change perspectives from "the piece just needs to move down" to asking myself what "moving down actually means". This project gave me my first taste of my love of programming. I love being given the end result and having to find my way to get there.
 ### This game is fully playable with the WASD keys. The high score is not currently functioning. I got busy with other projects/commitments, but this is still in the works and I look forward to having a fully featured Tetris clone, along with a Hold function and a few unique special pieces.
+### Play here: https://pete-wiley-tetris.herokuapp.com/
