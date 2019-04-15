@@ -1,4 +1,5 @@
 //setting globals
+const axios = require('axios')
 const canvas = document.getElementById("board")
 const context = canvas.getContext("2d")
 const scoreHTML = document.getElementById("score")
@@ -10,29 +11,13 @@ const sq = 20
 const vacant = "#204362"
 
 
-getItems = async () => {
-    try {
-        let response = await fetch('https://pw-tetris-api.herokuapp.com/', {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin':'*',
-            }
-        });
-        let res = await response.json();
-        if (!res) {
-            console.log('Nope');
-        } else {
-            console.log(res);
-        }
-    } catch (error) {
-        console.log('Something went wrong');
-    }
-}
-
-getItems()
+axios.get('https://pw-tetris-api.herokuapp.com/')
+    .then(function (response) {
+        console.log(response)
+    })
+    .catch(function(error) {
+        console.log(error)
+    })
 
 //-----------------------------------------------------------------------------
 //draw a single square
