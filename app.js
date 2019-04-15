@@ -8,7 +8,7 @@ const row = 20
 const col = 10
 const sq = 20
 const vacant = "#204362"
-const dbScore = []
+let dbScore = 7
 
 
 getItems = async () => {
@@ -24,7 +24,7 @@ getItems = async () => {
         if (!res) {
             console.log('Nope');
         } else {
-            console.log(res[0].score)
+            dbScore = res[0].score
         }
     } catch (error) {
         console.log('Something went wrong');
@@ -291,4 +291,4 @@ function drop(){
 
 drop() 
 
-highScore.innerHTML = 7
+highScore.innerHTML = dbScore
