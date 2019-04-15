@@ -26,6 +26,7 @@ getItems = async () => {
         } else {
             console.log(res);
             dbScore = res
+            console.log('dbScore = ' + dbScore)
         }
     } catch (error) {
         console.log('Something went wrong');
