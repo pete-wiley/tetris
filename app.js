@@ -24,10 +24,6 @@ getItems = async () => {
             console.log('Nope');
         } else {
             console.log(res);
-            this.setState({
-                items: res,
-                gotRes: 1
-            })
         }
     } catch (error) {
         console.log('Something went wrong');
