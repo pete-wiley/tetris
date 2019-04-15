@@ -25,7 +25,7 @@ getItems = async () => {
             console.log('Nope');
         } else {
             console.log(res);
-            dbScore = JSON.stringify(res[0]).score
+            dbScore = res
         }
     } catch (error) {
         console.log('Something went wrong');
@@ -292,4 +292,6 @@ function drop(){
 
 drop() 
 
-highScore.innerHTML = dbScore
+console.log(dbScore)
+
+highScore.innerHTML = 7
