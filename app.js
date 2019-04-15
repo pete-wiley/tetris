@@ -12,7 +12,7 @@ const vacant = "#204362"
 
 getItems = async () => {
     try {
-        let response = await fetch('https://roommate-api-v3.herokuapp.com/items', {
+        let response = await fetch('https://pw-tetris-api.herokuapp.com/', {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
