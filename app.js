@@ -9,6 +9,30 @@ const col = 10
 const sq = 20
 const vacant = "#204362"
 
+
+getItems = async () => {
+    try {
+        let response = await fetch('https://pw-tetris-api.herokuapp.com/', {
+            method: 'GET',
+            //mode: 'no-cors',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        let res = await response.json();
+        if (!res) {
+            console.log('Nope');
+        } else {
+            console.log(res);
+        }
+    } catch (error) {
+        console.log('Something went wrong');
+    }
+}
+
+getItems()
+
 //-----------------------------------------------------------------------------
 //draw a single square
 
