@@ -1,5 +1,4 @@
 //setting globals
-const axios = require('axios')
 const canvas = document.getElementById("board")
 const context = canvas.getContext("2d")
 const scoreHTML = document.getElementById("score")
