@@ -9,9 +9,9 @@ const col = 10
 const sq = 20
 const vacant = "#204362"
 let dbScore = 7
+let hsid
 
-
-getItems = async () => {
+getScore = async () => {
     try {
         let response = await fetch('https://pw-tetris-api.herokuapp.com/', {
             method: 'GET',
@@ -25,22 +25,47 @@ getItems = async () => {
             console.log('Nope');
         } else {
             highScore.innerHTML = res[0].score
+            hsid = res[0]._id
         }
     } catch (error) {
         console.log('Something went wrong');
     }
 }
+updateScore = async () => {
+    try {
+        let response = await fetch(`https://pw-tetris-api.herokuapp.com/${hsid}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                score: scoreHTML.innerHTML
+            }),
+        });
+        let res = await response.text();
+        if (res.errors) {
+            console.log(res.errors)
+            // this.setState({ errors: res.errors });
+        } else {
+            console.log(res);
+        }
+    } catch (errors) {
+        console.log('catch err');
+        console.log(errors);
+    }
+}
 
-getItems()
+getScore()
 
 //-----------------------------------------------------------------------------
 //draw a single square
 
-function drawSquare (x, y, color){
+function drawSquare(x, y, color) {
     context.fillStyle = color
-    context.fillRect(x*sq, y*sq, sq, sq)
+    context.fillRect(x * sq, y * sq, sq, sq)
     context.strokeStyle = "black"
-    context.strokeRect(x*sq, y*sq, sq, sq)
+    context.strokeRect(x * sq, y * sq, sq, sq)
 }
 
 //-----------------------------------------------------------------------------
@@ -49,15 +74,15 @@ function drawSquare (x, y, color){
 let board = []
 for (r = 0; r < row; r++) {
     board[r] = []
-    for(c = 0; c < col; c++) {
+    for (c = 0; c < col; c++) {
         board[r][c] = vacant
     }
 }
 
 //draw board
-function drawBoard () {
-    for(r = 0; r < row; r++) {
-        for(c = 0; c < col; c++){
+function drawBoard() {
+    for (r = 0; r < row; r++) {
+        for (c = 0; c < col; c++) {
             drawSquare(c, r, board[r][c])
         }
     }
@@ -81,9 +106,9 @@ const pieces = [
 ]
 
 //generate random piece
-function randomPiece () {
+function randomPiece() {
     let rand = Math.floor(Math.random() * pieces.length)
-    return new piece (pieces[rand][0], pieces[rand][1])
+    return new piece(pieces[rand][0], pieces[rand][1])
 }
 
 let p = randomPiece()
@@ -91,7 +116,7 @@ let p = randomPiece()
 //-----------------------------------------------------------------------------
 //The piece class
 
-function piece (tetromino, color) {
+function piece(tetromino, color) {
     this.tetromino = tetromino
     this.color = color
 
@@ -104,10 +129,10 @@ function piece (tetromino, color) {
 }
 
 //fill piece
-piece.prototype.fill = function(color){
+piece.prototype.fill = function (color) {
     for (r = 0; r < this.activeTetromino.length; r++) {
         for (c = 0; c < this.activeTetromino.length; c++) {
-            if(this.activeTetromino[r][c]) {
+            if (this.activeTetromino[r][c]) {
                 drawSquare(this.x + c, this.y + r, color)
             }
         }
@@ -115,11 +140,11 @@ piece.prototype.fill = function(color){
 }
 
 //draw piece
-piece.prototype.draw = function(){
+piece.prototype.draw = function () {
     this.fill(this.color)
 }
 //undraw piece
-piece.prototype.undraw = function(){
+piece.prototype.undraw = function () {
     this.fill(vacant)
 }
 
@@ -127,7 +152,7 @@ piece.prototype.undraw = function(){
 //piece movement
 //move piece down
 piece.prototype.moveDown = function () {
-    if(!this.collision(0, 1, this.activeTetromino)){
+    if (!this.collision(0, 1, this.activeTetromino)) {
         this.undraw()
         this.y++
         this.draw()
@@ -139,7 +164,7 @@ piece.prototype.moveDown = function () {
 
 //move piece right
 piece.prototype.moveRight = function () {
-    if(!this.collision(1, 0, this.activeTetromino)){
+    if (!this.collision(1, 0, this.activeTetromino)) {
         this.undraw()
         this.x++
         this.draw()
@@ -148,7 +173,7 @@ piece.prototype.moveRight = function () {
 
 //move piece left
 piece.prototype.moveLeft = function () {
-    if(!this.collision(-1, 0, this.activeTetromino)){
+    if (!this.collision(-1, 0, this.activeTetromino)) {
         this.undraw()
         this.x--
         this.draw()
@@ -159,14 +184,14 @@ piece.prototype.moveLeft = function () {
 piece.prototype.rotate = function () {
     let nextPattern = this.tetromino[(this.tetrominoPat + 1) % this.tetromino.length]
     let kick = 0
-    if (this.collision(0, 0, nextPattern)){
-        if(this.x > col/2) { //its the right wall
+    if (this.collision(0, 0, nextPattern)) {
+        if (this.x > col / 2) { //its the right wall
             kick = -1 //move left
         } else { //its the left wall
             kick = 1 //move right
         }
     }
-    if(!this.collision(0, 0, nextPattern)){
+    if (!this.collision(0, 0, nextPattern)) {
         this.undraw()
         this.x += kick
         this.tetrominoPat = (this.tetrominoPat + 1) % this.tetromino.length;
@@ -191,10 +216,11 @@ piece.prototype.lock = function () {
                 gameOver = true
                 if (score > highScore.innerHTML) {
                     highScore.innerHTML = score
+                    updateScore()
                 }
                 break
             }
-            board [this.y + r][this.x + c] = this.color
+            board[this.y + r][this.x + c] = this.color
         }
     }
     //clear lines
@@ -222,19 +248,19 @@ piece.prototype.lock = function () {
 //collision function
 piece.prototype.collision = function (x, y, piece) {
     for (r = 0; r < piece.length; r++) {
-        for (c = 0; c <piece.length; c++){
-            if(!piece[r][c]){
+        for (c = 0; c < piece.length; c++) {
+            if (!piece[r][c]) {
                 continue;
             }
             let newX = this.x + c + x
             let newY = this.y + r + y
-            if (newX < 0 || newX >= col || newY >= row){
+            if (newX < 0 || newX >= col || newY >= row) {
                 return true;
             }
             if (newY < 0) {
                 continue
             }
-            if(board[newY][newX] != vacant){
+            if (board[newY][newX] != vacant) {
                 return true
             }
         }
@@ -245,14 +271,14 @@ piece.prototype.collision = function (x, y, piece) {
 //control piece
 document.addEventListener("keydown", control)
 
-function control (e) {
-    if (score >= 10){
+function control(e) {
+    if (score >= 10) {
         dropTime = 600
-    } if (score >= 20){
+    } if (score >= 20) {
         dropTime = 300
-    } if (score >= 30){
+    } if (score >= 30) {
         dropTime = 150
-    } if (score >= 40){
+    } if (score >= 40) {
         dropTime = 50
     }
 
@@ -269,19 +295,19 @@ function control (e) {
         p.moveDown()
         dropStart = Date.now()
     }
-console.log(dropTime)
+    console.log(dropTime)
 }
 
 //drop at interval
 let dropStart = Date.now()
 let gameOver = false
 let dropTime = 1000
-function drop(){
+function drop() {
     let now = Date.now()
     let delta = now - dropStart
     if (delta > dropTime) {
         p.moveDown()
-        dropStart= Date.now()
+        dropStart = Date.now()
     }
     if (score >= 4) {
         droptime = 100
