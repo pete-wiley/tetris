@@ -189,7 +189,9 @@ piece.prototype.lock = function () {
 
                 alert("Game Over")
                 gameOver = true
-                highScore.innerHTML = score
+                if (score > highScore.innerHTML) {
+                    highScore.innerHTML = score
+                }
                 break
             }
             board [this.y + r][this.x + c] = this.color
