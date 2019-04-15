@@ -10,7 +10,31 @@ const sq = 20
 const vacant = "#204362"
 
 
+getItems = async () => {
+    try {
+        let response = await fetch('https://roommate-api-v3.herokuapp.com/items', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        let res = await response.json();
+        if (!res) {
+            console.log('Nope');
+        } else {
+            console.log(res);
+            this.setState({
+                items: res,
+                gotRes: 1
+            })
+        }
+    } catch (error) {
+        console.log('Something went wrong');
+    }
+}
 
+getItems()
 
 //-----------------------------------------------------------------------------
 //draw a single square
