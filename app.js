@@ -24,13 +24,12 @@ getItems = async () => {
         if (!res) {
             console.log('Nope');
         } else {
-            console.log(res);
             dbScore = res
-            console.log('dbScore = ' + dbScore)
         }
     } catch (error) {
         console.log('Something went wrong');
     }
+    console.log("dbscore = " + dbScore)
 }
 
 getItems()
@@ -292,7 +291,5 @@ function drop(){
 }
 
 drop() 
-
-console.log(dbScore)
 
 highScore.innerHTML = 7
