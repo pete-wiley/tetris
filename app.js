@@ -24,7 +24,7 @@ getItems = async () => {
         if (!res) {
             console.log('Nope');
         } else {
-            console.log(res)
+            console.log(res[0].score)
         }
     } catch (error) {
         console.log('Something went wrong');
