@@ -14,10 +14,11 @@ getItems = async () => {
     try {
         let response = await fetch('https://pw-tetris-api.herokuapp.com/', {
             method: 'GET',
-            //mode: 'no-cors',
+            mode: 'cors',
             headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'*',
             }
         });
         let res = await response.json();
