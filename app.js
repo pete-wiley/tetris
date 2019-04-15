@@ -24,12 +24,11 @@ getItems = async () => {
         if (!res) {
             console.log('Nope');
         } else {
-            dbScore = res
+            console.log(res)
         }
     } catch (error) {
         console.log('Something went wrong');
     }
-    console.log("dbscore = " + dbScore)
 }
 
 getItems()
