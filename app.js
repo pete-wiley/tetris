@@ -10,13 +10,7 @@ const sq = 20
 const vacant = "#204362"
 
 
-axios.get('https://pw-tetris-api.herokuapp.com/')
-    .then(function (response) {
-        console.log(response)
-    })
-    .catch(function(error) {
-        console.log(error)
-    })
+
 
 //-----------------------------------------------------------------------------
 //draw a single square
