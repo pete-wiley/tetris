@@ -6,7 +6,7 @@ const reset = document.getElementById("reset")
 let highScore = document.getElementById("high-score")
 const row = 20
 const col = 10
-const sq = 20
+const sq = 35
 const vacant = "#204362"
 let dbScore = 7
 let hsid
